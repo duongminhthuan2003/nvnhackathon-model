@@ -1,0 +1,24 @@
+{
+  "total_samples": 255,
+  "num_labels": 5,
+  "label_distribution": {
+    "các bạn": 51,
+    "gặp": 51,
+    "tôi": 51,
+    "vui": 51,
+    "xin chào": 51
+  },
+  "imbalance_ratio": 1.0,
+  "shape_errors": 0,
+  "missing_values": 0,
+  "label_errors": 0,
+  "avg_zero_keypoints": 0.24,
+  "label_variances": {
+    "các bạn": 0.005426564834085511,
+    "gặp": 0.00611979798691394,
+    "tôi": 0.00438040444527202,
+    "vui": 0.004840775786018599,
+    "xin chào": 0.005581374352694529
+  },
+  "avg_variance": 0.00526978348099692
+}
