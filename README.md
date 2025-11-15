@@ -1,74 +1,31 @@
-# VIETNAMESE SIGN LANGUAGE RECOGNITION
-A system for recognizing Vietnamese Sign Language using deep learning and computer vision techniques, tailored specifically for Vietnamese sign language.
-## Demo
-https://github.com/user-attachments/assets/c143c7f2-9a7c-4033-9c41-a196322e6b5d
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Running the Application](#running-the-application)
-  - [Training from Scratch](#training-from-scratch)
-## Overview
-The Vietnamese Sign Language Recognition system leverages deep learning models and computer vision to interpret Vietnamese sign language gestures. It uses MediaPipe for landmark detection, TensorFlow for model training, and Streamlit for a user-friendly interface. The system supports recognition through video files or live webcam feeds.
-## Features
-- Automated Video Download: Automatically downloads videos for training data.
-- Data Preprocessing: Processes and augments data for model training.
-- Sign Language Recognition: Recognizes Vietnamese sign language gestures via video or webcam input.
-- User Interface: Provides a Streamlit-based web interface for easy interaction.
-## Requirements
-- **Software**:
-    - Python 3.8 or higher
-    - TensorFlow 2.x
-    - Scikit-learn
-    - MediaPipe
-    - OpenCV
-    - Streamlit
-- **Hardware**:
-    - Webcam (required for webcam recognition)
-    - GPU (recommended for model training)
-## Installation
-### 1. Clone the repository
+## Cài đặt:
+### Clone repo và cài các libraries cần thiết:
 ```bash
 git clone https://github.com/photienanh/Vietnamese-Sign-Language-Recognition
 cd Vietnamese-Sign-Language-Recognition
-```
-Alternatively, download the ZIP file from GitHub and extract it.
-### 2. Install Dependencies
-Ensure Python is installed. If not, you can download and install it from the official [Python website](https://www.python.org/downloads/). Then, install the required libraries:
-```bash
 pip install -r requirements.txt
 ```
-## Usage
-The system can be used either by running the pre-trained model or by training a new model from scratch.
-### Running the Application
-To use the pre-trained model with the Streamlit interface:
-```bash
-streamlit run main.py
-```
-This launches a web interface where you can upload videos or use a webcam for sign language recognition.
-### Training from Scratch
-To train a new model, follow these steps:
-1. Clear Previous Data (optional).
-```bash
-Get-ChildItem -Path "./" -Directory | Remove-Item -Recurse -Force
-```
-2. Download Training Data.
-```bash
-python download_data.py
-```
-
-3. Process Data.
+## Training:
+### Tạo data set:
+1. Tải dataset từ link: https://drive.google.com/drive/folders/1wSo8qsBwAOVg-JHWVK3WNENl0se3dqiC?usp=sharing
+2. Quay video training và đặt tên theo format v[xxxx]_[y].mp4
+3. Chỉnh sửa lại file Text trong dataset cho đúng với từng video để notebook nhận được video mới
+### Tạo data:
 ```bash
 python create_data_augment.py
 ```
-
-4. Train the Model.
-- Open ```training.ipynb``` in a Jupyter Notebook environment.
-- Run all cells to train the model.
-- Note: Training is computationally intensive and best performed on a GPU-enabled device.
-5. Run the Application.
+### Training
+1. Tạo tài khoản Kaggle, sau đó xác minh để có thể dùng GPU train nhanh hơn **rất** nhiều.
+2. Nén folder Data (gồm các file .npz) tạo được ở phần "Tạo data" và upload lên Kaggle.
+3. Upload file label_map.json lên Kaggle.
+4. Mở note book Kaggle để train: https://www.kaggle.com/code/duongminhthuan/trainning
+5. Ở phần input bên phải, nhấn Add input và chọn folder Data + file label_map.json vừa tải lên.
+6. Ở cell thứ 2 của notebook, sửa lại:
 ```bash
-streamlit run main.py
+DATA_PATH        = 'đường dẫn chỉ đến folder Data'
+LABEL_MAP_PATH   = 'đường dẫn chỉ đến file label_map.json'
 ```
+7. Chọn vào Settings của notebook -> chọn Accelerator -> GPU T4 x2
+8. Nhấn Run all
+9. Sau khi train xong, file final_model.keras sẽ nằm ở trong folder output ở bên tay phải.
+10. Có thể test model trước với Streamlit.
